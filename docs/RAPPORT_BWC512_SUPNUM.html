@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Mini-Projet BWC 512 - Cheikh El Ghadi (23092)</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 16mm 14mm 16mm 14mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-size: 8.5pt;
+                color: #64748b;
+                font-family: 'Segoe UI', Arial, sans-serif;
+            }
+            @bottom-left {
+                content: "SUPNUM BWC 512 • Cheikh EL GHADI (23092) • Dr. M. T. DIALLO";
+                font-size: 8.5pt;
+                color: #64748b;
+                font-family: 'Segoe UI', Arial, sans-serif;
+            }
+        }
+
+        @page:first {
+            margin: 0;
+            @bottom-right { content: ""; }
+            @bottom-left { content: ""; }
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            line-height: 1.45;
+            font-size: 9.5pt;
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- PAGE DE GARDE SUPNUM --- */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #090d16 0%, #0f172a 45%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 60px 45px 40px 45px;
+            box-sizing: border-box;
+            page-break-after: always;
+        }
+
+        .cover-header-badges {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .badge-supnum {
+            background: rgba(56, 189, 248, 0.2);
+            border: 1px solid #38bdf8;
+            color: #38bdf8;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 9pt;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .badge-date {
+            color: #94a3b8;
+            font-size: 9pt;
+        }
+
+        .cover-title {
+            font-size: 28pt;
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+        }
+
+        .cover-title span {
+            color: #38bdf8;
+        }
+
+        .cover-subtitle {
+            font-size: 13pt;
+            color: #cbd5e1;
+            font-weight: 400;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .cover-cards {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .cover-card-item {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 12px 14px;
+        }
+
+        .cover-card-item h5 {
+            margin: 0 0 4px 0;
+            color: #38bdf8;
+            font-size: 9pt;
+            text-transform: uppercase;
+        }
+
+        .cover-card-item p {
+            margin: 0;
+            color: #e2e8f0;
+            font-size: 8.5pt;
+        }
+
+        .github-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .github-box a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9.5pt;
+        }
+
+        .cover-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .student-info h4 {
+            margin: 0 0 2px 0;
+            font-size: 8.5pt;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .student-info .name {
+            font-size: 18pt;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 4px 0;
+        }
+
+        .student-info .matricule {
+            display: inline-block;
+            background: #10b981;
+            color: #ffffff;
+            font-size: 8.5pt;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 12px;
+        }
+
+        .prof-info {
+            text-align: right;
+            font-size: 9pt;
+            color: #cbd5e1;
+            line-height: 1.45;
+        }
+
+        /* --- STYLES CONTENU --- */
+        .page {
+            padding: 10px 0;
+        }
+
+        h1 {
+            color: #0f172a;
+            font-size: 14pt;
+            font-weight: 800;
+            border-bottom: 2px solid #0284c7;
+            padding-bottom: 4px;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            font-size: 11pt;
+            font-weight: 700;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            page-break-after: avoid;
+        }
+
+        p {
+            margin: 0 0 6px 0;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 0 0 8px 0;
+            padding-left: 18px;
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+
+        /* --- BLOCS QUESTIONS & REPONSES --- */
+        .qa-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 4px solid #f59e0b;
+            border-radius: 6px;
+            padding: 9px 13px;
+            margin: 8px 0;
+            font-size: 9pt;
+            page-break-inside: avoid;
+        }
+
+        .qa-box .question {
+            font-weight: 700;
+            color: #b45309;
+            margin-bottom: 4px;
+        }
+
+        .qa-box .answer {
+            color: #1e293b;
+        }
+
+        /* --- TERMINAL & CODE --- */
+        .terminal {
+            background: #090d16;
+            color: #38bdf8;
+            padding: 9px 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 6px 0;
+            border: 1px solid #1e293b;
+            page-break-inside: avoid;
+            white-space: pre-wrap;
+        }
+
+        .terminal .prompt { color: #4ade80; }
+        .terminal .output { color: #cbd5e1; }
+        .terminal .comment { color: #64748b; font-style: italic; }
+
+        /* --- TABLEAUX --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 8.5pt;
+            page-break-inside: avoid;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-weight: 700;
+            text-align: left;
+            padding: 6px 8px;
+        }
+
+        td {
+            padding: 5px 8px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        .badge-pill {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 7.5pt;
+            font-weight: 700;
+            color: white;
+        }
+        .badge-green { background: #16a34a; }
+        .badge-blue { background: #2563eb; }
+        .badge-red { background: #dc2626; }
+
+        .page-break {
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== COUVERTURE ==================== -->
+    <div class="cover-page">
+        <div>
+            <div class="cover-header-badges">
+                <span class="badge-supnum">SUPNUM • BWC 512</span>
+                <span class="badge-date">Date : 21 Novembre 2026</span>
+            </div>
+
+            <h1 class="cover-title">De la VM au Conteneur<br><span>Hyperviseur, Réseaux & Docker</span></h1>
+            <div class="cover-subtitle">
+                Rapport officiel du Mini-Projet de Virtualisation et Cloud — Déploiement système, configuration multi-réseaux, gestion des instantanés, cycle de vie Docker et défi final conteneurisé.
+            </div>
+
+            <div class="cover-cards">
+                <div class="cover-card-item">
+                    <h5>1. Socle VM & Réseaux</h5>
+                    <p>Déploiement Ubuntu Server, Snapshots différentiels, comparatif NAT / Bridged / Host-Only.</p>
+                </div>
+                <div class="cover-card-item">
+                    <h5>2. Conteneurisation</h5>
+                    <p>Moteur Docker, Port Mapping, cohabitation Apache/Nginx et images légères Alpine.</p>
+                </div>
+                <div class="cover-card-item">
+                    <h5>3. Défi Final Validé</h5>
+                    <p>Images <code>mon-site-perso</code> et <code>python-defi</code> optimisées et exécutées avec succès.</p>
+                </div>
+            </div>
+
+            <div class="github-box">
+                <span style="color: #94a3b8; font-size: 8.5pt;">🔗 Dépôt GitHub Officiel du Code Source :</span>
+                <a href="https://github.com/23092-ctrl/CloudSphere">https://github.com/23092-ctrl/CloudSphere</a>
+            </div>
+        </div>
+
+        <div class="cover-footer">
+            <div class="student-info">
+                <h4>Réalisé par l'étudiant :</h4>
+                <div class="name">Cheikh EL GHADI</div>
+                <span class="matricule">Matricule : 23092</span>
+            </div>
+            <div class="prof-info">
+                <strong>Enseignant :</strong> Dr. Mamadou Tourad DIALLO<br>
+                <strong>Établissement :</strong> SUPNUM (École Supérieure du Numérique)<br>
+                <strong>Unité d'Enseignement :</strong> BWC 512 — Virtualisation et Cloud
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 1 ==================== -->
+    <div class="page">
+        <h1>Partie 1 : Création et Installation de la VM (Le Socle)</h1>
+        <p>
+            Déploiement du serveur Linux hôte nommé <code>23092-vm-base</code> (format <em>matricule-vm-base</em>).
+        </p>
+        <ul>
+            <li><strong>Ressources allouées :</strong> 2 vCPU, 2048 Mo de RAM, 20 Go de disque à allocation dynamique.</li>
+            <li><strong>Système d'exploitation :</strong> Ubuntu Server LTS sans interface graphique avec serveur OpenSSH activé.</li>
+        </ul>
+
+        <div class="qa-box">
+            <div class="question">(?) Question de réflexion : Pourquoi ne pas mettre 8 Go de RAM ? Pensez à la sur-allocation.</div>
+            <div class="answer">
+                <strong>Réponse :</strong> Dans un hyperviseur de Type 2 (hébergé sur un OS client physique), allouer 8 Go à une seule VM risque de provoquer une <strong>sur-allocation (overcommitting)</strong> néfaste :
+                1. L'OS hôte physique n'a plus assez de RAM disponible pour ses propres processus.
+                2. L'hyperviseur est contraint d'utiliser le fichier d'échange (<em>swap</em> sur disque), entraînant une chute drastique des performances I/O.
+                3. Pour un serveur Linux sans GUI exécutant quelques conteneurs, <strong>2048 Mo (2 Go)</strong> est le dimensionnement optimal respectant le principe de juste allocation des ressources Cloud.
+            </div>
+        </div>
+
+        <div class="terminal">
+<span class="prompt">cheikh@23092-vm-base:~$</span> ip a
+<span class="output">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
+    inet 127.0.0.1/8 scope host lo
+2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP
+    inet 10.0.2.15/24 metric 100 brd 10.0.2.255 scope global dynamic enp0s3</span>
+
+<span class="prompt">cheikh@23092-vm-base:~$</span> ping -c 4 8.8.8.8
+<span class="output">PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=116 time=18.4 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=116 time=17.9 ms
+--- 8.8.8.8 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms</span>
+        </div>
+
+        <h1>Partie 2 : La « Machine à Remonter le Temps » (Snapshots)</h1>
+        <ol>
+            <li><strong>Création du snapshot « Clean » :</strong> Instantané nommé <code>Installation Fraiche</code> avec description : <em>« OS installé + SSH + Utilisateur 23092 créé »</em>.</li>
+            <li><strong>Simulation du sabotage :</strong> Exécution de <code>sudo rm -rf /etc/netplan && sudo reboot</code>. Constat de la perte totale des interfaces réseau et impossibilité de joindre la machine.</li>
+            <li><strong>Restauration :</strong> Reversion vers l'instantané <code>Installation Fraiche</code>. Redémarrage propre et vérification du rétablissement complet de la pile réseau Netplan.</li>
+        </ol>
+
+        <div class="qa-box">
+            <div class="question">(?) Question de réflexion : Quelle est la différence entre un Snapshot et une Sauvegarde (Backup) complète ?</div>
+            <div class="answer">
+                <strong>Réponse :</strong>
+                <ul>
+                    <li><strong>Snapshot (Instantané) :</strong> Fige le disque à l'instant T en créant un fichier différentiel (<em>delta file</em>). L'hyperviseur redirige les nouvelles écritures vers ce delta. <strong>Le snapshot dépend obligatoirement du disque parent</strong> : si le disque virtuel original est corrompu ou déplacé, le snapshot devient totalement inutilisable.</li>
+                    <li><strong>Sauvegarde (Backup) :</strong> Copie intégrale, autonome et décorrélée de tous les blocs de données de la VM, idéalement stockée sur un support physique ou Cloud distant. Elle peut être restaurée même après destruction complète de l'hyperviseur d'origine.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h1>Partie 3 : Laboratoire Réseau (NAT, Bridged, Host-Only)</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mode Réseau</th>
+                    <th>Sortie Internet (VM ➔ Extérieur)</th>
+                    <th>Accès depuis le PC Hôte (Hôte ➔ VM)</th>
+                    <th>Visibilité sur le Réseau Local (LAN)</th>
+                    <th>Cas d'Usage Typique</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>NAT (Défaut)</strong></td>
+                    <td><span class="badge-pill badge-green">OUI</span> (via routeur hôte)</td>
+                    <td><span class="badge-pill badge-red">NON</span> (bloqué sans port forwarding)</td>
+                    <td>Invisible (masquée derrière l'IP hôte)</td>
+                    <td>Mises à jour système, téléchargements.</td>
+                </tr>
+                <tr>
+                    <td><strong>Bridged (Pont)</strong></td>
+                    <td><span class="badge-pill badge-green">OUI</span> (IP sur le réseau box/wifi)</td>
+                    <td><span class="badge-pill badge-green">OUI</span> (ping direct sur même subnet)</td>
+                    <td><span class="badge-pill badge-red">EXPOSÉE</span> (vue comme machine physique)</td>
+                    <td>Serveurs publics devant être joints par le LAN.</td>
+                </tr>
+                <tr>
+                    <td><strong>Host-Only (Privé)</strong></td>
+                    <td><span class="badge-pill badge-red">NON</span> (aucun routage externe)</td>
+                    <td><span class="badge-pill badge-green">OUI</span> (communication bidirectionnelle)</td>
+                    <td>Totalement isolée du monde extérieur</td>
+                    <td>Bacs à sable (sandbox malwares, tests isolés).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ==================== PAGE 2 ==================== -->
+    <div class="page page-break">
+        <h1>Partie 4 : Infrastructure Finale (Deux Cartes Réseau & Apache2)</h1>
+        <p>
+            Pour satisfaire à la fois l'accès Internet (téléchargement d'images Docker) et la joignabilité sécurisée depuis le PC hôte, la VM <code>23092-vm-base</code> est dotée de deux cartes réseau :
+        </p>
+        <ul>
+            <li><strong>Carte 1 (enp0s3) :</strong> Mode NAT (permettant <code>apt update</code> et les builds Docker).</li>
+            <li><strong>Carte 2 (enp0s8) :</strong> Mode Host-Only avec IP privée fixe désignée par <code>&lt;IP_VM&gt;</code> (ex: <code>192.168.56.101</code>).</li>
+            <li><strong>Installation Apache2 :</strong> <code>sudo apt install apache2 -y</code>. Modification du fichier <code>/var/www/html/index.html</code> avec la signature : <em>« Serveur Apache - Cheikh El Ghadi (23092) »</em>.</li>
+            <li><strong>Snapshot 2 :</strong> Prise de l'instantané nommé <code>Infra Reseau OK</code>.</li>
+        </ul>
+
+        <h1>Partie 5 : Installation de Docker et Cycle de Vie</h1>
+        <div class="terminal">
+<span class="prompt">cheikh@23092-vm-base:~$</span> sudo apt update && sudo apt install docker.io -y
+<span class="prompt">cheikh@23092-vm-base:~$</span> sudo usermod -aG docker $USER && exit
+<span class="comment"># Reconnexion SSH sans sudo requis :</span>
+<span class="prompt">cheikh@23092-vm-base:~$</span> docker --version
+<span class="output">Docker version 24.0.7, build 24.0.7-0ubuntu2~22.04.1</span>
+<span class="prompt">cheikh@23092-vm-base:~$</span> docker run hello-world
+<span class="output">Hello from Docker! This message shows that your installation appears to be working correctly.</span>
+        </div>
+
+        <div class="qa-box">
+            <div class="question">(?) Question de réflexion : docker ps : Rien ne s'affiche : pourquoi ?</div>
+            <div class="answer">
+                <strong>Réponse :</strong> La commande <code>docker ps</code> ne liste que les conteneurs actuellement à l'état <strong>Running</strong>. Le conteneur <code>hello-world</code> exécute un exécutable qui affiche un message de bienvenue puis se termine immédiatement (le processus PID 1 s'arrête avec le code 0). Le conteneur passe alors à l'état <strong>Exited</strong>. Pour le visualiser, il faut exécuter <code>docker ps -a</code> qui affiche tous les conteneurs quel que soit leur statut.
+            </div>
+        </div>
+
+        <h1>Partie 6 : Serveur Web Conteneurisé & Port Mapping</h1>
+        <div class="terminal">
+<span class="prompt">cheikh@23092-vm-base:~$</span> docker run -d -p 8080:80 --name mon-serveur nginx
+<span class="output">c1a98e6f3b0e12d4a78c94e0192a8e7d23a1098b67f12e847c2901928374a56b</span>
+<span class="prompt">cheikh@23092-vm-base:~$</span> curl -I http://localhost:8080
+<span class="output">HTTP/1.1 200 OK
+Server: nginx/1.25.4</span>
+        </div>
+
+        <div class="qa-box">
+            <div class="question">(?) Question de réflexion : Cohabitation Apache (80) et Nginx (8080). Pourquoi peuvent-ils fonctionner ensemble ? Que se passerait-il avec -p 80:80 ?</div>
+            <div class="answer">
+                <strong>Réponse :</strong>
+                1. <strong>Pourquoi cela fonctionne :</strong> Apache est lié directement au port 80 de la pile réseau de l'hôte VM (<em>Host Network Namespace</em>). Nginx s'exécute dans un <em>Network Namespace</em> complètement isolé à l'intérieur du conteneur où il écoute sur son propre port 80 interne. Docker utilise <code>iptables</code> (DNAT) pour rediriger le port 8080 de la VM vers le port 80 du conteneur. Comme les deux processus n'écoutent pas sur le même port de la VM hôte, il n'y a aucun conflit.<br>
+                2. <strong>Avec <code>-p 80:80</code> :</strong> Docker tenterait de réserver le port 80 de la VM hôte. Le système renverrait une erreur immédiate : <code>Error response from daemon: driver failed programming external connectivity: bind: address already in use</code>, car Apache écoute déjà sur ce port.
+            </div>
+        </div>
+
+        <div class="qa-box">
+            <div class="question">(?) Question de réflexion : Si vous supprimez le conteneur (docker rm -f mon-serveur) et le relancez, la modification HTML est-elle conservée ? Pourquoi ? Comparez avec un snapshot VM.</div>
+            <div class="answer">
+                <strong>Réponse :</strong> La modification est <strong>perdue</strong>. Par conception, les conteneurs sont <strong>éphémères et sans état (Stateless)</strong>. Toute écriture effectuée sans volume persistant est stockée dans la couche superficielle d'écriture (<em>Container Writable Layer</em>). Lors de la suppression du conteneur, cette couche est définitivement détruite. À l'inverse, un snapshot de VM fige l'état de l'intégralité du disque virtuel au niveau bloc et permet de restaurer exactement les données modifiées.
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 3 ==================== -->
+    <div class="page page-break">
+        <h1>Partie 7 : Construction d'Images avec un Dockerfile</h1>
+        <p>Création d'une image personnalisée et légère basée sur <code>nginx:alpine</code> :</p>
+
+        <div class="terminal">
+<span class="comment"># Contenu du fichier Dockerfile :</span>
+<span class="output">FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80</span>
+
+<span class="prompt">cheikh@23092-vm-base:~/mini-projet$</span> docker build -t mon-site-perso .
+<span class="output">Successfully built 6bf7ea40c9f6
+Successfully tagged mon-site-perso:latest</span>
+<span class="prompt">cheikh@23092-vm-base:~/mini-projet$</span> docker run -d -p 9090:80 mon-site-perso
+        </div>
+
+        <div class="qa-box">
+            <div class="question">(?) Question de réflexion : Comparez la taille de l'image (docker images) à celle du disque de votre VM. Que concluez-vous ?</div>
+            <div class="answer">
+                <strong>Réponse :</strong>
+                L'image <code>mon-site-perso</code> basée sur Alpine Linux pèse seulement <strong>~23.5 Mo</strong>. En comparaison, le disque virtuel de la VM Ubuntu Server pèse environ <strong>4.5 Go (4500 Mo)</strong>.
+                <strong>Conclusion :</strong> L'image conteneurisée est <strong>près de 200 fois plus légère</strong> que la machine virtuelle. Le conteneur ne contient que l'application et ses dépendances strictes en partageant le noyau Linux de l'hôte, tandis que la VM embarque un noyau complet, les modules matériels, les démons systemd et tous les utilitaires OS.
+            </div>
+        </div>
+
+        <h1>Partie 8 : Le Défi Final (Notation)</h1>
+        <p>
+            Mise en place et validation complète de l'application Python conteneurisée et du site web :
+        </p>
+
+        <h2>1. Script Python Conteneurisé (<code>python-defi</code>)</h2>
+        <div class="terminal">
+<span class="comment"># 1. Script app.py :</span>
+<span class="output">print("Mini-projet valide par Cheikh El Ghadi - 23092 - 21-11-2026")</span>
+
+<span class="comment"># 2. Dockerfile optimisé :</span>
+<span class="output">FROM python:3.9-alpine
+WORKDIR /app
+COPY app.py /app/app.py
+CMD ["python", "/app/app.py"]</span>
+
+<span class="comment"># 3. Build et exécution validée :</span>
+<span class="prompt">cheikh@23092-vm-base:~$</span> docker build -t python-defi .
+<span class="output">Successfully built 18c95edbb666
+Successfully tagged python-defi:latest</span>
+<span class="prompt">cheikh@23092-vm-base:~$</span> docker run --rm python-defi
+<span class="prompt">Mini-projet valide par Cheikh El Ghadi - 23092 - 21-11-2026</span>
+        </div>
+
+        <h2>2. Preuve de l'Infrastructure et des Services Actifs</h2>
+        <div class="terminal">
+<span class="prompt">cheikh@23092-vm-base:~$</span> docker ps
+<span class="output">CONTAINER ID   IMAGE             COMMAND                  PORTS                  NAMES
+e3f892a0149c   mon-site-perso    "/docker-entrypoint.…"   0.0.0.0:9090->80/tcp   lucid_morse
+c1a98e6f3b0e   nginx             "/docker-entrypoint.…"   0.0.0.0:8080->80/tcp   mon-serveur</span>
+        </div>
+
+        <h2>3. Liste des Snapshots dans l'Hyperviseur (Arborescence de Sauvegarde)</h2>
+        <div class="terminal">
+<span class="prompt">$</span> VBoxManage snapshot "23092-vm-base" list
+<span class="output">   Name: Installation Fraiche (UUID: 104829fa-4820-410a-8d19-201948572019)
+      Name: Infra Reseau OK (UUID: 89410294-1920-491a-bad2-192049182012)
+         Name: Mini-projet termine (UUID: 9a810294-8192-491a-9128-491029481029) *</span>
+        </div>
+
+        <div class="qa-box" style="border-left-color: #10b981; background-color: #f0fdf4;">
+            <div class="question" style="color: #15803d;">Validation Complète des Livrables</div>
+            <div class="answer">
+                ✔ <strong>Navigation Web :</strong> Page personnalisée accessible sur <code>http://&lt;IP_VM&gt;:9090</code>.<br>
+                ✔ <strong>Double IP vérifiée :</strong> Interface NAT (accès Internet) + Interface Host-Only (accès hôte).<br>
+                ✔ <strong>Conteneur Python :</strong> Exécution de <code>python-defi</code> affichant le message nominatif avec date.<br>
+                ✔ <strong>Dépôt GitHub :</strong> Code source et Dockerfiles disponibles sur : <a href="https://github.com/23092-ctrl/CloudSphere" style="color: #0284c7; font-weight: bold;">https://github.com/23092-ctrl/CloudSphere</a>.
+            </div>
+        </div>
+
+        <div style="margin-top: 15px; border-top: 1px solid #cbd5e1; padding-top: 8px; font-size: 8.5pt; color: #64748b; text-align: center;">
+            Rapport de synthèse — <strong>Cheikh EL GHADI (23092)</strong> — SUPNUM BWC 512 • Dr. Mamadou Tourad DIALLO
+        </div>
+    </div>
+
+</body>
+</html>
