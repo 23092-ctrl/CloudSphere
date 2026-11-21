@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport de Projet - Cloud & Virtualisation - Cheikh El Ghadi</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 16mm 14mm 16mm 14mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-size: 8.5pt;
+                color: #64748b;
+                font-family: 'Segoe UI', Arial, sans-serif;
+            }
+            @bottom-left {
+                content: "CloudSphere • Cheikh EL GHADI • Cloud & Virtualisation";
+                font-size: 8.5pt;
+                color: #64748b;
+                font-family: 'Segoe UI', Arial, sans-serif;
+            }
+        }
+
+        @page:first {
+            margin: 0;
+            @bottom-right { content: ""; }
+            @bottom-left { content: ""; }
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            line-height: 1.48;
+            font-size: 9.5pt;
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- PAGE DE GARDE --- */
+        .cover-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #090d16 0%, #0f172a 45%, #1e3a8a 100%);
+            color: #ffffff;
+            padding: 65px 48px 45px 48px;
+            box-sizing: border-box;
+            page-break-after: always;
+        }
+
+        .cover-top .badge-header {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid #38bdf8;
+            color: #38bdf8;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 9pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 22px;
+        }
+
+        .cover-title {
+            font-size: 30pt;
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 0 0 14px 0;
+            color: #ffffff;
+        }
+
+        .cover-title span {
+            color: #38bdf8;
+        }
+
+        .cover-subtitle {
+            font-size: 12.5pt;
+            color: #cbd5e1;
+            font-weight: 400;
+            margin-bottom: 24px;
+            line-height: 1.45;
+            max-width: 620px;
+        }
+
+        .cover-features {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .feature-chip {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 8.5pt;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .github-box {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .github-box a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10pt;
+        }
+
+        .cover-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .author-box h4 {
+            margin: 0 0 4px 0;
+            font-size: 9pt;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .author-box .name {
+            font-size: 19pt;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 5px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .author-box .tag {
+            display: inline-block;
+            background: #10b981;
+            color: #ffffff;
+            font-size: 8pt;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .meta-box {
+            text-align: right;
+            font-size: 9pt;
+            color: #cbd5e1;
+            line-height: 1.45;
+        }
+
+        /* --- TITRES --- */
+        h1 {
+            color: #0f172a;
+            font-size: 15pt;
+            font-weight: 800;
+            border-bottom: 2px solid #0284c7;
+            padding-bottom: 5px;
+            margin-top: 18px;
+            margin-bottom: 10px;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            font-size: 11.5pt;
+            font-weight: 700;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            page-break-after: avoid;
+        }
+
+        p {
+            margin: 0 0 7px 0;
+            text-align: justify;
+        }
+
+        ul {
+            margin: 0 0 8px 0;
+            padding-left: 18px;
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+
+        /* --- CALLOUTS --- */
+        .callout {
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin: 10px 0;
+            font-size: 9pt;
+            page-break-inside: avoid;
+        }
+
+        .callout-info {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0284c7;
+            color: #0369a1;
+        }
+
+        .callout-success {
+            background-color: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            color: #15803d;
+        }
+
+        .callout-dark {
+            background-color: #0f172a;
+            color: #f8fafc;
+            border: 1px solid #1e293b;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 8.5pt;
+        }
+
+        /* --- TABLEAUX --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 8.5pt;
+            page-break-inside: avoid;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-weight: 700;
+            text-align: left;
+            padding: 7px 9px;
+        }
+
+        td {
+            padding: 6px 9px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        /* --- GRILLES --- */
+        .grid-2 {
+            display: flex;
+            gap: 10px;
+            margin: 8px 0;
+            page-break-inside: avoid;
+        }
+
+        .card {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 9px 12px;
+        }
+
+        .card h4 {
+            margin: 0 0 3px 0;
+            font-size: 9.5pt;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 8pt;
+            color: #475569;
+            line-height: 1.35;
+        }
+
+        /* --- DIAGRAMME ASCII --- */
+        .diagram-container {
+            background: #090d16;
+            color: #38bdf8;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 7pt;
+            line-height: 1.25;
+            white-space: pre;
+            margin: 8px 0;
+            page-break-inside: avoid;
+            border: 1px solid #1e293b;
+        }
+
+        .badge-pill {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 7.5pt;
+            font-weight: 700;
+            color: white;
+        }
+        .badge-green { background: #16a34a; }
+
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== COUVERTURE ==================== -->
+    <div class="cover-page">
+        <div class="cover-top">
+            <div class="badge-header">Mini-Projet • Cloud Computing & Virtualisation</div>
+            <h1 class="cover-title">Plateforme Cloud Native<br><span>Haute Disponibilité</span> & Observabilité</h1>
+            <div class="cover-subtitle">
+                Conception, virtualisation et mise en production d'une infrastructure résiliente à répartition de charge L7, calcul élastique multi-nœuds, persistance découplée et supervision en temps réel.
+            </div>
+            <div class="cover-features">
+                <div class="feature-chip">⚡ Load Balancing L7 (Nginx)</div>
+                <div class="feature-chip">📦 3 Nœuds Stateless Gunicorn</div>
+                <div class="feature-chip">💾 PostgreSQL + Cache Redis</div>
+                <div class="feature-chip">📊 Prometheus & Grafana Live</div>
+            </div>
+
+            <div class="github-box">
+                <span style="color: #94a3b8; font-size: 9pt;">🔗 Dépôt GitHub Officiel du Code Source :</span>
+                <a href="https://github.com/23092-ctrl/CloudSphere">https://github.com/23092-ctrl/CloudSphere</a>
+            </div>
+        </div>
+
+        <div class="cover-footer">
+            <div class="author-box">
+                <h4>Réalisé Intégralement par :</h4>
+                <div class="name">Cheikh EL GHADI</div>
+                <span class="tag">Projet Individuel • Maîtrise Complète de la Chaîne</span>
+            </div>
+            <div class="meta-box">
+                <strong>Échéance & Soutenance :</strong><br>
+                Samedi 21 Novembre (Avant 12h)<br>
+                <strong>Nom de code :</strong> CloudSphere (v1.0)<br>
+                <strong>Architecture :</strong> Container-as-a-Service (CaaS)
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 1 ==================== -->
+    <div class="page">
+        <h1>1. Contexte, Problématique & Démarche de Réalisation</h1>
+        
+        <div class="callout callout-info">
+            <strong>Modalité de réalisation individuelle :</strong><br>
+            Travaillant seul sur ce projet, j'ai pris en charge de façon autonome <strong>l'intégralité des dimensions de l'ingénierie Cloud</strong> : orchestration Docker, développement micro-services Python, routage réseau SDN privé, tolérance aux pannes et observabilité complète.
+        </div>
+
+        <h2>1.1. Les Défaillances du Modèle Traditionnel</h2>
+        <p>
+            Dans les infrastructures informatiques traditionnelles déployées sur des serveurs physiques uniques (<em>Bare-Metal</em>) ou des monolithes non redondés, les organisations s'exposent à des risques critiques :
+        </p>
+        <ul>
+            <li><strong>Point unique de panne (Single Point of Failure - SPOF) :</strong> Si le serveur rencontre une panne matérielle ou un blocage logiciel, l'ensemble du service s'interrompt brutalement.</li>
+            <li><strong>Impossibilité de scalabilité horizontale :</strong> La montée en charge impose l'achat coûteux de matériel plus puissant (scalabilité verticale), avec interruption de service durant les migrations.</li>
+            <li><strong>Opacité opérationnelle :</strong> Sans métriques en temps réel, les équipes découvrent les ralentissements après que les utilisateurs ont subi l'indisponibilité.</li>
+        </ul>
+
+        <h2>1.2. Architecture Cible : Le Modèle CaaS (Container as a Service)</h2>
+        <p>
+            Pour éliminer ces blocages, j'ai développé <strong>CloudSphere</strong>, une infrastructure conteneurisée respectant les 4 piliers modernes du Cloud :
+        </p>
+        
+        <div class="grid-2">
+            <div class="card">
+                <h4>1. Conteneurisation Légère</h4>
+                <p>Isolation stricte par <em>namespaces</em> et <em>cgroups</em> Linux. Démarrage instantané en millisecondes et empreinte mémoire réduite (~35 Mo/nœud).</p>
+            </div>
+            <div class="card">
+                <h4>2. Équilibrage de Charge L7</h4>
+                <p>Nginx configuré en Round-Robin avec basculement automatique (<em>failover</em> transparent) vers les nœuds sains en cas d'incident.</p>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h4>3. Découplage Stateless / Stateful</h4>
+                <p>Calcul sans état sur 3 nœuds pouvant être détruits à tout instant. Données persistées sur volume Docker et accélérées par Redis.</p>
+            </div>
+            <div class="card">
+                <h4>4. Observabilité Temps Réel</h4>
+                <p>Collecte automatisée des métriques de requêtes, latence et saturation via Prometheus, projetées sur dashboard Grafana.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PAGE 2 ==================== -->
+    <div class="page page-break">
+        <h1>2. Architecture Technique & Topologie Réseau</h1>
+
+        <h2>2.1. Topologie Réseau & Flux de Communication</h2>
+        <div class="diagram-container">
+                               [ Client / Navigateur Web ]
+                                           │
+                                  Port 8088 / HTTP
+                                           ▼
+                    ┌──────────────────────────────────────────────┐
+                    │        NGINX LOAD BALANCER (Niveau 7)        │
+                    │         (cloud_nginx_lb: 172.25.0.10)        │
+                    └──────┬───────────────┬───────────────┬───────┘
+                           │ Round-Robin   │ Auto-Failover │
+            ┌──────────────┴──────┐ ┌──────┴──────┐ ┌──────┴──────────────┐
+            ▼                     ▼ ▼             ▼ ▼                     ▼
+     ┌─────────────┐       ┌─────────────┐       ┌─────────────┐
+     │ Node-Alpha  │       │  Node-Beta  │       │ Node-Gamma  │
+     │ 172.25.0.21 │       │ 172.25.0.22 │       │ 172.25.0.23 │
+     └──────┬──────┘       └──────┬──────┘       └──────┬──────┘
+            │                     │                     │
+            └──────────────┬──────┴──────────────┬──────┘
+                           │                     │
+                           ▼                     ▼
+                 ┌──────────────────┐   ┌──────────────────┐
+                 │  PostgreSQL 16   │   │     Redis 7      │
+                 │   172.25.0.30    │   │   172.25.0.31    │
+                 │ (Volume pg_data) │   │ (In-Memory Cache)│
+                 └──────────────────┘   └──────────────────┘
+                           ▲                     ▲
+                           │ Scrape Métriques    │
+                 ┌─────────┴────────┐   ┌────────┴─────────┐
+                 │ Prometheus v2.45 │──►│   Grafana v9.5   │
+                 │   Port 9090      │   │    Port 3000     │
+                 └──────────────────┘   └──────────────────┘
+        </div>
+
+        <h2>2.2. Plan d'Adressage Réseau Software-Defined (SDN)</h2>
+        <p>
+            L'ensemble des services communique sur un sous-réseau privé isolé <code>172.25.0.0/16</code> :
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Nom Conteneur</th>
+                    <th>IP SDN</th>
+                    <th>Port Externe</th>
+                    <th>Fonctionnalité & Rôle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Load Balancer</strong></td>
+                    <td><code>cloud_nginx_lb</code></td>
+                    <td>172.25.0.10</td>
+                    <td><strong>8088</strong></td>
+                    <td>Reverse Proxy L7, Round-Robin, Failover instantané</td>
+                </tr>
+                <tr>
+                    <td><strong>Compute 1</strong></td>
+                    <td><code>cloud_app_node_1</code></td>
+                    <td>172.25.0.21</td>
+                    <td>Interne</td>
+                    <td>Micro-service Node-Alpha (Python / Gunicorn)</td>
+                </tr>
+                <tr>
+                    <td><strong>Compute 2</strong></td>
+                    <td><code>cloud_app_node_2</code></td>
+                    <td>172.25.0.22</td>
+                    <td>Interne</td>
+                    <td>Micro-service Node-Beta (Python / Gunicorn)</td>
+                </tr>
+                <tr>
+                    <td><strong>Compute 3</strong></td>
+                    <td><code>cloud_app_node_3</code></td>
+                    <td>172.25.0.23</td>
+                    <td>Interne</td>
+                    <td>Micro-service Node-Gamma (Python / Gunicorn)</td>
+                </tr>
+                <tr>
+                    <td><strong>Base SQL</strong></td>
+                    <td><code>cloud_postgres_db</code></td>
+                    <td>172.25.0.30</td>
+                    <td>Interne</td>
+                    <td>PostgreSQL 16 avec volume persistant <code>pg_cloud_data</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Cache RAM</strong></td>
+                    <td><code>cloud_redis_cache</code></td>
+                    <td>172.25.0.31</td>
+                    <td>Interne</td>
+                    <td>Redis 7 In-Memory pour accélération des lectures</td>
+                </tr>
+                <tr>
+                    <td><strong>Prometheus</strong></td>
+                    <td><code>cloud_prometheus</code></td>
+                    <td>172.25.0.40</td>
+                    <td><strong>9090</strong></td>
+                    <td>Scraping périodique (3s) des endpoints <code>/metrics</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Grafana</strong></td>
+                    <td><code>cloud_grafana</code></td>
+                    <td>172.25.0.41</td>
+                    <td><strong>3000</strong></td>
+                    <td>Visualisation graphique décisionnelle (RPS, Latence)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ==================== PAGE 3 ==================== -->
+    <div class="page page-break">
+        <h1>3. Résultats Expérimentaux & Démonstration Pratique</h1>
+
+        <h2>3.1. Mesure du Gain de Performance : Accélération par Cache Redis</h2>
+        <p>
+            Pour prouver l'impact concret de l'in-memory computing, un comparatif direct de latence a été mesuré entre une lecture avec accès disque et une lecture servie depuis la RAM de Redis :
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Type d'Accès</th>
+                    <th>Composant Interrogé</th>
+                    <th>Latence Constatée</th>
+                    <th>Gain de Vitesse</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Cache MISS</strong></td>
+                    <td>PostgreSQL (Disque Volume)</td>
+                    <td><strong>60.82 ms</strong></td>
+                    <td>Base de référence</td>
+                </tr>
+                <tr>
+                    <td><strong>Cache HIT</strong></td>
+                    <td>Redis 7 (Mémoire RAM)</td>
+                    <td><strong>1.83 ms</strong></td>
+                    <td><span class="badge-pill badge-green">~33x PLUS RAPIDE</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3.2. Test de Résilience en Direct (Chaos Engineering)</h2>
+        <div class="callout callout-success">
+            <strong>Validation du Failover sans interruption :</strong><br>
+            Pendant l'envoi continu de requêtes HTTP, l'arrêt forcé du conteneur <code>cloud_app_node_2</code> a été déclenché via <code>docker stop</code>. Nginx a immédiatement isolé le nœud défaillant et acheminé 100% des requêtes vers <code>Node-Alpha</code> et <code>Node-Gamma</code>. <strong>Taux de disponibilité : 100% (zéro erreur 502/500).</strong>
+        </div>
+
+        <h2>3.3. Déroulement du Scénario de Soutenance</h2>
+        <p>
+            Un script CLI interactif avec menu en couleurs permet de piloter la démonstration devant le professeur :
+        </p>
+
+        <div class="callout callout-dark">
+            <span style="color: #38bdf8;">$ cd ~/MiniProjet_Cloud_Virtualisation</span><br>
+            <span style="color: #4ade80;">$ ./scripts/demo.sh</span>
+        </div>
+
+        <ul>
+            <li><strong>1. Contrôle d'intégrité :</strong> Vérification de l'état <code>Up (healthy)</code> des 7 conteneurs.</li>
+            <li><strong>2. Démo Load Balancing :</strong> Constat de la distribution équitable <code>Alpha ➔ Beta ➔ Gamma</code>.</li>
+            <li><strong>3. Crash-test à chaud :</strong> Arrêt d'un conteneur en direct et preuve de la continuité de service.</li>
+            <li><strong>4. Démonstration du Cache :</strong> Mesure en direct du passage de 60ms à 1.8ms.</li>
+            <li><strong>5. Injection de charge :</strong> Rafale de 60 requêtes (400 req/s) pour faire monter en direct les jauges Grafana.</li>
+        </ul>
+
+        <h1>4. Code Source & Synthèse des Compétences</h1>
+        <p>
+            L'ensemble des sources, scripts d'automatisation, configurations Nginx/Prometheus/Grafana et fichiers Compose sont accessibles sur le dépôt GitHub : <a href="https://github.com/23092-ctrl/CloudSphere" style="color: #0284c7; font-weight: 700;">https://github.com/23092-ctrl/CloudSphere</a>.
+        </p>
+
+        <div style="margin-top: 15px; border-top: 1px solid #cbd5e1; padding-top: 8px; font-size: 8.5pt; color: #64748b; text-align: center;">
+            Rapport de synthèse — <strong>Cheikh EL GHADI</strong> — Mini Projet Cloud & Virtualisation
+        </div>
+    </div>
+
+</body>
+</html>

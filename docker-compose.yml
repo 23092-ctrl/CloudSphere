@@ -1,0 +1,183 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # INGRESS & LOAD BALANCING TIER (EDGE LAYER)
+  # ==========================================
+  nginx:
+    image: nginx:alpine
+    container_name: cloud_nginx_lb
+    restart: always
+    ports:
+      - "8088:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app-node-1
+      - app-node-2
+      - app-node-3
+    networks:
+      cloud_net:
+        ipv4_address: 172.25.0.10
+
+  # ==========================================
+  # COMPUTE TIER (HIGH AVAILABILITY MICROSERVICES)
+  # ==========================================
+  app-node-1:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: cloud_app_node_1
+    restart: always
+    environment:
+      - NODE_NAME=Node-Alpha
+      - NODE_COLOR=#3b82f6
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=cloud_db
+      - DB_USER=cloud_user
+      - DB_PASSWORD=cloud_secret_pass
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      cloud_net:
+        ipv4_address: 172.25.0.21
+
+  app-node-2:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: cloud_app_node_2
+    restart: always
+    environment:
+      - NODE_NAME=Node-Beta
+      - NODE_COLOR=#10b981
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=cloud_db
+      - DB_USER=cloud_user
+      - DB_PASSWORD=cloud_secret_pass
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      cloud_net:
+        ipv4_address: 172.25.0.22
+
+  app-node-3:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: cloud_app_node_3
+    restart: always
+    environment:
+      - NODE_NAME=Node-Gamma
+      - NODE_COLOR=#f59e0b
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=cloud_db
+      - DB_USER=cloud_user
+      - DB_PASSWORD=cloud_secret_pass
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      cloud_net:
+        ipv4_address: 172.25.0.23
+
+  # ==========================================
+  # DATA & STORAGE TIER (PERSISTENCE & CACHE)
+  # ==========================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: cloud_postgres_db
+    restart: always
+    environment:
+      - POSTGRES_DB=cloud_db
+      - POSTGRES_USER=cloud_user
+      - POSTGRES_PASSWORD=cloud_secret_pass
+    volumes:
+      - pg_cloud_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cloud_user -d cloud_db"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    networks:
+      cloud_net:
+        ipv4_address: 172.25.0.30
+
+  redis:
+    image: redis:7-alpine
+    container_name: cloud_redis_cache
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+    networks:
+      cloud_net:
+        ipv4_address: 172.25.0.31
+
+  # ==========================================
+  # OBSERVABILITY & SUPERVISION TIER
+  # ==========================================
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    container_name: cloud_prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      cloud_net:
+        ipv4_address: 172.25.0.40
+
+  grafana:
+    image: grafana/grafana:9.5.1
+    container_name: cloud_grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/json/cloud_dashboard.json
+    volumes:
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./grafana/provisioning/dashboards/json:/etc/grafana/provisioning/dashboards/json:ro
+    depends_on:
+      - prometheus
+    networks:
+      cloud_net:
+        ipv4_address: 172.25.0.41
+
+networks:
+  cloud_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1
+
+volumes:
+  pg_cloud_data:
+    driver: local

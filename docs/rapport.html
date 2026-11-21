@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10.2" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Rapport de Projet - Cloud &amp; Virtualisation</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Rapport de Projet - Cloud &amp; Virtualisation</h1>
+</header>
+<h1 id="rapport-de-projet-cloud-virtualisation">RAPPORT DE PROJET :
+CLOUD &amp; VIRTUALISATION</h1>
+<hr />
+<h2
+id="projet-conception-et-déploiement-dune-infrastructure-cloud-native-résiliente-haute-disponibilité-et-observée-cloudsphere"><strong>Projet
+: Conception et Déploiement d’une Infrastructure Cloud Native
+Résiliente, Haute Disponibilité et Observée (CloudSphere)</strong></h2>
+<ul>
+<li><strong>Module :</strong> Cloud Computing &amp; Virtualisation</li>
+<li><strong>Date de Soutenance :</strong> Samedi 21 Novembre (Avant
+12h)</li>
+<li><strong>Taille du Groupe :</strong> 4 Personnes</li>
+</ul>
+<hr />
+<h2 id="composition-de-léquipe-répartition-des-rôles">👥 1. Composition
+de l’Équipe &amp; Répartition des Rôles</h2>
+<p>Afin de respecter les standards industriels et les méthodologies
+agiles DevOps, le projet a été structuré en 4 pôles de compétences
+complémentaires :</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Nom de l’Étudiant</th>
+<th>Rôle Assigné</th>
+<th>Responsabilités Clés</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Membre 1</strong></td>
+<td><strong>Ingénieur DevOps &amp; Virtualisation (Lead)</strong></td>
+<td>Conception de l’architecture d’isolation, Dockerfiles multi-étapes,
+stratégie de conteneurisation Alpine, orchestration des services via
+Docker Compose et cycle de vie.</td>
+</tr>
+<tr>
+<td><strong>Membre 2</strong></td>
+<td><strong>Développeur Microservices &amp; Backend Cloud</strong></td>
+<td>Implémentation du service applicatif Python Flask multi-threads
+(Gunicorn), gestion des sessions distribuées, intégration du client
+Prometheus et endpoints de santé (<em>Healthchecks</em>).</td>
+</tr>
+<tr>
+<td><strong>Membre 3</strong></td>
+<td><strong>Architecte Réseau Cloud &amp; Sécurité</strong></td>
+<td>Conception du Software-Defined Network (SDN) en adressage privé CIDR
+<code>172.25.0.0/16</code>, configuration du Reverse Proxy et Load
+Balancer L7 Nginx, gestion du basculement automatique
+(<em>failover</em>).</td>
+</tr>
+<tr>
+<td><strong>Membre 4</strong></td>
+<td><strong>Ingénieur Observabilité &amp; SRE (Site Reliability
+Engineer)</strong></td>
+<td>Définition des SLO/SLI, configuration de la collecte de métriques
+Prometheus, création et automatisation du tableau de bord Grafana temps
+réel, script de simulation de trafic.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="contexte-problématique-industrielle">📖 2. Contexte &amp;
+Problématique Industrielle</h2>
+<p>Dans les architectures monolithiques traditionnelles hébergées sur
+serveurs physiques dédiés (<em>bare-metal</em>), les entreprises font
+face à des limitations critiques : 1. <strong>Gaspillage des ressources
+physiques :</strong> Taux d’utilisation CPU/RAM souvent inférieur à 15%.
+2. <strong>Point unique de défaillance (<em>Single Point of Failure -
+SPOF</em>) :</strong> Toute panne matérielle ou crash d’application
+provoque une indisponibilité totale du service. 3. <strong>Incapacité à
+passer à l’échelle (<em>Scaling</em>) :</strong> La montée en charge
+nécessite l’achat coûteux de matériel plus puissant (scalabilité
+verticale). 4. <strong>Opacité de l’état système :</strong> Absence de
+métriques fines en temps réel pour anticiper les congestions.</p>
+<h3 id="objectifs-du-mini-projet">Objectifs du Mini-Projet :</h3>
+<p>L’objectif de ce projet est de concevoir, implémenter et valider une
+plateforme Cloud complète répondant aux exigences suivantes : -
+<strong>Virtualisation légère :</strong> Découpage en micro-services
+isolés par conteneurs. - <strong>Haute Disponibilité (HA) &amp;
+Équilibrage de Charge :</strong> Répartition transparente du trafic sur
+un pool d’instances avec tolérance aux pannes à chaud. -
+<strong>Découplage État / Traitement :</strong> Séparation stricte entre
+les nœuds applicatifs sans état (<em>Stateless</em>) et la couche de
+persistance/cache (<em>Stateful</em>). - <strong>Observabilité continue
+:</strong> Tableau de bord dynamique permettant de superviser les
+transactions par seconde, le temps de réponse et l’état des nœuds.</p>
+<hr />
+<h2 id="fondements-théoriques-virtualisation-modèles-cloud">🔬 3.
+Fondements Théoriques : Virtualisation &amp; Modèles Cloud</h2>
+<h3 id="hyperviseurs-vs-conteneurs-virtualisation-dos">3.1. Hyperviseurs
+vs Conteneurs (Virtualisation d’OS)</h3>
+<pre><code>        VIRTUALISATION MATÉRIELLE                VIRTUALISATION PAR CONTENEURS
+             (Hyperviseur Type 2)                             (Docker / CaaS)
+    ┌───────────────────────────────────┐        ┌───────────────────────────────────┐
+    │  App A   │  App B   │    App C    │        │  App A   │  App B   │    App C    │
+    ├──────────┼──────────┼─────────────┤        ├──────────┼──────────┼─────────────┤
+    │ Bins/Lib │ Bins/Lib │  Bins/Lib   │        │ Bins/Lib │ Bins/Lib │  Bins/Lib   │
+    ├──────────┼──────────┼─────────────┤        ├───────────────────────────────────┤
+    │ Guest OS │ Guest OS │  Guest OS   │        │       Moteur de Conteneur         │
+    │ (Linux)  │ (Windows)│   (Linux)   │        │             (Docker)              │
+    ├───────────────────────────────────┤        ├───────────────────────────────────┤
+    │       Hyperviseur (KVM/VirtualBox)│        │      Noyau de l&#39;OS Hôte           │
+    ├───────────────────────────────────┤        │   (Namespaces, cgroups, chroot)   │
+    │             OS Hôte               │        ├───────────────────────────────────┤
+    ├───────────────────────────────────┤        │             Matériel              │
+    │             Matériel              │        │        (CPU, RAM, Disque)         │
+    └───────────────────────────────────┘        └───────────────────────────────────┘</code></pre>
+<ul>
+<li><strong>Hyperviseurs (Type 1 Bare-Metal / Type 2 Hosted) :</strong>
+Virtualisent le matériel complet. Chaque machine virtuelle (VM) embarque
+son propre noyau d’OS, nécessitant plusieurs gigaoctets de disque et des
+minutes de démarrage.</li>
+<li><strong>Conteneurs (CaaS - Utilisé dans notre projet) :</strong>
+Partagent le noyau unique de l’hôte Linux tout en garantissant une
+isolation stricte grâce aux fonctionnalités natives du noyau :
+<ul>
+<li><strong>Namespaces :</strong> Isolation des processus
+(<code>PID</code>), des interfaces réseau (<code>NET</code>), des points
+de montage (<code>MNT</code>), et des utilisateurs
+(<code>USER</code>).</li>
+<li><strong>Control Groups (cgroups) :</strong> Banalisation et
+restriction de la consommation mémoire, CPU et I/O disque.</li>
+<li><strong>Avantages constatés :</strong> Démarrage des conteneurs en
+quelques millisecondes, empreinte mémoire de seulement ~30 Mo par
+instance, portabilité universelle.</li>
+</ul></li>
+</ul>
+<h3 id="modèles-de-service-cloud-iaas-paas-saas-caas">3.2. Modèles de
+Service Cloud (IaaS, PaaS, SaaS, CaaS)</h3>
+<ul>
+<li><strong>IaaS (<em>Infrastructure as a Service</em>) :</strong>
+Fourniture de ressources brutes (réseaux, machines virtuelles,
+stockage).</li>
+<li><strong>CaaS (<em>Container as a Service</em>) :</strong> Notre
+projet s’inscrit au cœur de ce modèle. L’infrastructure orchestre des
+conteneurs standardisés, découplant totalement le code applicatif de la
+machine physique.</li>
+<li><strong>PaaS (<em>Platform as a Service</em>) :</strong> Abstraction
+complète où le développeur ne fournit que le code source (ex. Heroku,
+GCP App Engine).</li>
+</ul>
+<hr />
+<h2 id="architecture-détaillée-de-la-solution-cloudsphere">🏛️ 4.
+Architecture Détaillée de la Solution “CloudSphere”</h2>
+<p>La solution déploie 7 conteneurs répartis sur un réseau virtuel privé
+dédié (<code>cloud_net</code>) :</p>
+<pre class="mermaid"><code>flowchart TD
+    Client([&quot;🌐 Client Web / API&quot;]) --&gt;|Port 8088| LB[&quot;Nginx Load Balancer\n172.25.0.10&quot;]
+    
+    subgraph Compute_Pool [&quot;Compute Tier (Microservices Stateless)&quot;]
+        N1[&quot;Node-Alpha\n172.25.0.21&quot;]
+        N2[&quot;Node-Beta\n172.25.0.22&quot;]
+        N3[&quot;Node-Gamma\n172.25.0.23&quot;]
+    end
+    
+    LB --&gt;|Round-Robin| N1
+    LB --&gt;|Round-Robin| N2
+    LB --&gt;|Round-Robin| N3
+    
+    subgraph Data_Tier [&quot;Data Tier (Persistance &amp; Cache Stateful)&quot;]
+        DB[(&quot;PostgreSQL 16\n172.25.0.30\nVolume: pg_cloud_data&quot;)]
+        RC[(&quot;Redis 7 Cache\n172.25.0.31\nIn-Memory&quot;)]
+    end
+    
+    N1 -.-&gt; DB
+    N2 -.-&gt; DB
+    N3 -.-&gt; DB
+    
+    N1 -.-&gt; RC
+    N2 -.-&gt; RC
+    N3 -.-&gt; RC
+    
+    subgraph Monitoring_Tier [&quot;Supervision &amp; Observabilité Cloud&quot;]
+        PROM[&quot;Prometheus v2.45\n172.25.0.40 :9090&quot;]
+        GRAF[&quot;Grafana v9.5\n172.25.0.41 :3000&quot;]
+    end
+    
+    PROM --&gt;|Scrape /metrics 3s| N1
+    PROM --&gt;|Scrape /metrics 3s| N2
+    PROM --&gt;|Scrape /metrics 3s| N3
+    GRAF --&gt;|Visualisation| PROM</code></pre>
+<h3 id="réseau-virtuel-dédié-software-defined-network">4.1. Réseau
+Virtuel Dédié (Software-Defined Network)</h3>
+<ul>
+<li><strong>Sous-réseau :</strong> <code>172.25.0.0/16</code></li>
+<li><strong>Passerelle (Gateway) :</strong> <code>172.25.0.1</code></li>
+<li><strong>Isolation :</strong> Les conteneurs communiquent entre eux
+par résolution DNS interne de Docker (ex. <code>postgres</code>,
+<code>redis</code>). Seuls les ports nécessaires sont exposés vers la
+machine hôte :
+<ul>
+<li>Port <code>8088</code> (Point d’entrée Nginx Load Balancer)</li>
+<li>Port <code>3000</code> (Interface de visualisation Grafana)</li>
+<li>Port <code>9090</code> (Serveur Prometheus)</li>
+</ul></li>
+</ul>
+<h3 id="équilibrage-de-charge-load-balancing-l7-nginx">4.2. Équilibrage
+de Charge (Load Balancing L7 Nginx)</h3>
+<p>Le Reverse Proxy applique un algorithme <strong>Round-Robin</strong>
+équitable sur le cluster des trois nœuds.<br />
+Configuration clé (<code>nginx.conf</code>) :</p>
+<pre class="nginx"><code>upstream backend_cluster {
+    server app-node-1:5000 max_fails=2 fail_timeout=3s;
+    server app-node-2:5000 max_fails=2 fail_timeout=3s;
+    server app-node-3:5000 max_fails=2 fail_timeout=3s;
+}</code></pre>
+<p>Grâce à la directive
+<code>proxy_next_upstream error timeout http_502;</code>, si un
+conteneur subit un crash inopiné, la requête en cours est immédiatement
+réacheminée vers un nœud sain sans que l’utilisateur ne reçoive d’erreur
+500 ou 502.</p>
+<h3 id="découplage-de-la-persistance-stateful-vs-stateless">4.3.
+Découplage de la Persistance (Stateful vs Stateless)</h3>
+<ul>
+<li><strong>Stateless (Nœuds App) :</strong> Les conteneurs
+<code>Node-Alpha</code>, <code>Node-Beta</code> et
+<code>Node-Gamma</code> ne conservent aucun état local sur disque. Ils
+peuvent être détruits, redémarrés ou dupliqués à volonté sans perte
+d’information.</li>
+<li><strong>Stateful (PostgreSQL &amp; Redis) :</strong> Les données de
+la base PostgreSQL sont montées sur un volume managé Docker
+(<code>pg_cloud_data</code>). Même en cas de suppression complète des
+conteneurs, les données métiers restent conservées intactes sur le
+système hôte.</li>
+</ul>
+<hr />
+<h2 id="observabilité-mesures-de-performance">📊 5. Observabilité &amp;
+Mesures de Performance</h2>
+<h3 id="métriques-exportées-prometheus">5.1. Métriques Exportées
+(Prometheus)</h3>
+<p>Chaque nœud applicatif intègre nativement la bibliothèque officielle
+<code>prometheus_client</code> et expose sur <code>/metrics</code> : -
+<code>cloud_http_requests_total</code> : Compteur de requêtes découpé
+par nœud, endpoint et code statut HTTP. -
+<code>cloud_http_request_duration_seconds</code> : Histogramme de
+latence des requêtes. - <code>cloud_active_connections</code> : Jauge de
+charge instantanée par conteneur. -
+<code>cloud_cache_operations_total</code> : Ratio de Cache Hits /
+Misses.</p>
+<h3 id="résultats-du-benchmark-cache-redis-vs-db">5.2. Résultats du
+Benchmark Cache (Redis vs DB)</h3>
+<p>Lors des tests d’injection de requêtes : - <strong>Requête sans cache
+(accès PostgreSQL direct) :</strong> <code>~60.8 ms</code> -
+<strong>Requête avec cache Redis (<em>In-Memory</em>) :</strong>
+<code>~1.8 ms</code> - <strong>Constat :</strong> Accélération d’un
+facteur <strong>&gt; 30x</strong>, réduisant drastiquement la
+sollicitation du processeur et du disque.</p>
+<hr />
+<h2 id="scénario-de-démonstration-en-direct-avant-12h">🎯 6. Scénario de
+Démonstration en Direct (Avant 12h)</h2>
+<p>Pour la soutenance devant le jury, la démonstration est entièrement
+orchestrée par le script <code>scripts/demo.sh</code> :</p>
+<ol type="1">
+<li><strong>Étape 1 : Présentation de l’infrastructure</strong>
+<ul>
+<li>Affichage de <code>docker-compose ps</code> montrant les 7
+conteneurs avec statuts <code>Up (healthy)</code>.</li>
+<li>Ouverture du navigateur sur <code>http://localhost:8088</code>.</li>
+</ul></li>
+<li><strong>Étape 2 : Démonstration du Load Balancing</strong>
+<ul>
+<li>Envoi de 9 requêtes via le terminal ou rafraîchissement web.</li>
+<li>Constat de la distribution cyclique : <code>Node-Alpha</code> ➔
+<code>Node-Beta</code> ➔ <code>Node-Gamma</code>.</li>
+</ul></li>
+<li><strong>Étape 3 : Test de Résilience / Crash à chaud (<em>Chaos
+Engineering</em>)</strong>
+<ul>
+<li>Exécution de <code>docker stop cloud_app_node_2</code>.</li>
+<li>Envoi immédiat de rafales de requêtes : le service reste disponible
+à 100% avec temps de réponse normal grâce au basculement Nginx sur Alpha
+et Gamma.</li>
+<li>Relance du conteneur via <code>docker start cloud_app_node_2</code>
+et réintégration instantanée sans reconfiguration manuelle.</li>
+</ul></li>
+<li><strong>Étape 4 : Validation de la Persistance des données</strong>
+<ul>
+<li>Ajout d’une tâche via le formulaire web sur un nœud.</li>
+<li>Requête de lecture effectuée sur un autre nœud : la donnée est
+immédiatement visible (volume partagé).</li>
+</ul></li>
+<li><strong>Étape 5 : Visualisation des Métriques en Temps Réel</strong>
+<ul>
+<li>Lancement du générateur de charge
+(<code>scripts/load_generator.py 100 10</code>).</li>
+<li>Projection du tableau de bord Grafana
+(<code>http://localhost:3000</code>) : observation des pics de RPS
+(Requêtes par seconde) et de la répartition par conteneur.</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="conclusion-perspectives-dévolution">🔮 7. Conclusion &amp;
+Perspectives d’Évolution</h2>
+<p>Ce mini-projet a permis de mettre en œuvre concrètement l’ensemble
+des concepts fondamentaux de l’ingénierie Cloud et de la virtualisation
+: - Gestion du cycle de vie des conteneurs et isolation des ressources.
+- Architecture résiliente et élastique sans point unique de panne
+(SPOF). - Modèle d’observabilité moderne conforme aux standards de
+l’industrie (Prometheus/Grafana).</p>
+<h3 id="évolutions-futures-possibles">Évolutions Futures possibles
+:</h3>
+<ol type="1">
+<li><strong>Migration vers Kubernetes (K8s) :</strong> Remplacement de
+Docker Compose par des manifestes K8s (Deployments, Services, Ingress
+Controller, StatefulSet) avec auto-scaling horizontal dynamique (<em>HPA
+- Horizontal Pod Autoscaler</em> basé sur la charge CPU).</li>
+<li><strong>Pipeline CI/CD GitOps :</strong> Automatisation des tests et
+du déploiement continu à l’aide de GitHub Actions et ArgoCD.</li>
+<li><strong>Chiffrement de bout en bout (TLS/SSL) :</strong> Mise en
+place de certificats Let’s Encrypt gérés automatiquement par un reverse
+proxy Traefik ou Nginx Ingress.</li>
+</ol>
+</body>
+</html>

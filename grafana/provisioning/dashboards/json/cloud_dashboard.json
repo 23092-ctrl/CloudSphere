@@ -1,0 +1,154 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 100,
+      "title": "Cloud Infrastructure Status & Nodes Health",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "mappings": [
+            { "options": { "0": { "color": "red", "text": "DOWN" }, "1": { "color": "green", "text": "UP" } }, "type": "value" }
+          ],
+          "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "green", "value": 1 }] }
+        }
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 1 },
+      "id": 1,
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "orientation": "horizontal",
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.1",
+      "targets": [
+        { "expr": "up{job=\"cloud-apps\"}", "legendFormat": "{{instance}}", "refId": "A" }
+      ],
+      "title": "Nœuds Actifs (High Availability)",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 1 },
+      "id": 2,
+      "options": {
+        "reduceOptions": { "calcs": ["sum"], "fields": "", "values": false }
+      },
+      "targets": [
+        { "expr": "sum(cloud_http_requests_total)", "legendFormat": "Total Requêtes", "refId": "A" }
+      ],
+      "title": "Volume Total des Requêtes Traitées",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 1 },
+      "id": 3,
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+      },
+      "targets": [
+        { "expr": "sum(cloud_cache_operations_total{result=\"hit\"})", "legendFormat": "Cache Hits", "refId": "A" },
+        { "expr": "sum(cloud_cache_operations_total{result=\"miss\"})", "legendFormat": "Cache Misses", "refId": "B" }
+      ],
+      "title": "Opérations de Cache In-Memory (Redis)",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 5 },
+      "id": 101,
+      "title": "Équilibrage de Charge & Métriques Réseau L7",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "fillOpacity": 20, "lineWidth": 2 }
+        }
+      },
+      "gridPos": { "h": 8, "w": 14, "x": 0, "y": 6 },
+      "id": 4,
+      "options": { "legend": { "displayMode": "list", "placement": "bottom" } },
+      "targets": [
+        { "expr": "rate(cloud_http_requests_total[30s])", "legendFormat": "{{node}} - {{endpoint}}", "refId": "A" }
+      ],
+      "title": "Débit par Nœud (Requêtes / sec)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" }
+        }
+      },
+      "gridPos": { "h": 8, "w": 10, "x": 14, "y": 6 },
+      "id": 5,
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "values": false },
+        "orientation": "horizontal"
+      },
+      "targets": [
+        { "expr": "sum by (node) (cloud_http_requests_total)", "legendFormat": "{{node}}", "refId": "A" }
+      ],
+      "title": "Répartition de Charge Nginx (Distribution des Requêtes)",
+      "type": "bargauge"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "Prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "fillOpacity": 15, "lineWidth": 2 },
+          "unit": "s"
+        }
+      },
+      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 14 },
+      "id": 6,
+      "targets": [
+        { "expr": "rate(cloud_http_request_duration_seconds_sum[30s]) / rate(cloud_http_request_duration_seconds_count[30s])", "legendFormat": "Latence moyenne - {{node}}", "refId": "A" }
+      ],
+      "title": "Temps de Réponse Moyen (Latence)",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["cloud", "loadbalancing", "virtualisation", "ha"],
+  "time": { "from": "now-15m", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "CloudSphere - Observabilité & Haute Disponibilité",
+  "uid": "cloud-sphere-ha",
+  "version": 1
+}
